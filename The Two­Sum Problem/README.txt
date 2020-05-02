@@ -1,1 +1,1 @@
-Interview Question: The Two-Sum ProblemDifficulty: Medium
+The Two-Sum ProblemDifficulty: Medium
