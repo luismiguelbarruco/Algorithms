@@ -55,12 +55,17 @@ A third option is to sort the array and use binary search. This is conceptually 
 ```c++
 private bool sumsToTarget(int[] arr, int k)
 {
+    Arrays.sorte(arr);
     for (int i = 0; i < arr.length; i++)
     {
-        for (int j = i + 1; j < arr.length; j++)
+        int siblingIndex  = Arrays.binarySearch(arr, k - arr[i]);
+
+        if(siblingIndex >= 0)
         {
-            if(arr[i] + arr[j] == k)
+            if (siblingIndex != i || (i > 0 && arr[i - 1] == arr[i]) || (i < arr.length – 1 && arr[i + 1] == arr[i])) 
+            {
                 return true;
+            }
         }
     }
 
@@ -77,13 +82,20 @@ The runtime of this algorithm depends on the sorting algorithm used. Using a sta
 ```c++
 private bool sumsToTarget(int[] arr, int k)
 {
-    for (int i = 0; i < arr.length; i++)
+    Arrays.sort(arr);
+    int lhs = 0;
+    int rhs = arr.length – 1;
+    
+    while (lhs < rhs) 
     {
-        for (int j = i + 1; j < arr.length; j++)
-        {
-            if(arr[i] + arr[j] == k)
-                return true;
-        }
+        int sum = arr[lhs] + arr[rhs];
+
+        if (sum == k) 
+            return true;
+        else if (sum <  k)
+            lhs++;
+        else               
+            rhs--;
     }
 
     return false;
